@@ -386,7 +386,7 @@ app.directive('weatherRowData', function()
       //alert(scope.weatherData);
       scope.getWeather = function()
       {
-          //alert(scope.weatherData.weather[scope.index].description);
+          //alert(scope.weatherData.weather[scope.index].description);    ppproovhnajokdjhnke
           //alert(scope.index);
           console.log(scope.index);
           alert(scope.weatherData.weather[scope.index].description);
