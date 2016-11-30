@@ -1,0 +1,193 @@
+:lang(en) /* om språket är satt till engelska */ 
+{
+
+font-size: 85%;
+
+font-family: arial, verdana, sans-serif;
+}
+
+.goog-te-banner-frame.skiptranslate {display: none !important;} 
+body { top: 0px !important; }
+
+#btnShowWeather:focus /* för knappen visa väder 14 dagar */
+{
+	outline: none;
+}
+
+#bodyColor
+{
+	background-color: lightblue;
+	border-color: lightblue;
+}
+
+h1
+{
+	color:#579C40;
+}
+hr {
+    height: 1px;
+    border: 2;
+    border-top: 1px solid;
+    margin: 1em 0;
+    padding: 0; 
+	border-color: #9700C9; /* för Chrome och Safari */
+	background-color: #9700C9; /* för Firefox och Opera */
+	color: #9700C9; /* För Internet Explorer 7+ */
+}
+#date /* där datumet visas */
+{
+	margin-left:2px;
+}
+/*#main
+{
+	cursor: move;
+}
+#city
+{
+	cursor: move;
+}*/
+#sortLables
+{
+	color: black;
+}
+
+.sortorder:after 
+{
+  content: '\25bc';   /* BLACK DOWN-POINTING TRIANGLE */
+}
+.sortorder.reverse:after 
+{
+  content: '\25b2';   /* BLACK UP-POINTING TRIANGLE */
+}
+
+.coldTemperature /* om temperature är <= 0 */
+{
+	color:#9CA9FF;
+}
+.colderTemperature /* om temperature är <= -10 */
+{
+	color:#576DFF;
+}
+.coldestTemperature /* om temperature är <= -20 */
+{
+	color:#0022FF;
+}
+.warmTemperature /* om temperature är > 0 */
+{
+	color:#FF9E9E;
+}
+.warmerTemperature /* om temperature är > 9 */
+{
+	color:#FF6161;
+}
+.warmestTemperature /* om temperature är > 19 */
+{
+	color:#FF0000;
+}
+
+#temp /* för att flytta på temperaturen längst ner på sidan */
+{
+	margin-left:10px;
+}
+
+.pointer
+{
+	cursor: pointer;
+}
+
+
+#selectedWeather:hover /* när man är över vädret med muspekaren */
+{
+	background-color: #D8B0FF;
+}
+
+/* ---- Button Add ---- */
+
+.buttonAdd {
+	-moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bddbfa), color-stop(1, #80b5ea));
+	background:-moz-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+	background:-webkit-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+	background:-o-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+	background:-ms-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+	background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bddbfa', endColorstr='#80b5ea',GradientType=0);
+	background-color:#bddbfa;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+	outline:0;
+}
+.buttonAdd:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa));
+	background:-moz-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+	background:-webkit-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+	background:-o-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+	background:-ms-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+	background:linear-gradient(to bottom, #80b5ea 5%, #bddbfa 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#80b5ea', endColorstr='#bddbfa',GradientType=0);
+	background-color:#80b5ea;
+	outline:0;
+}
+.buttonAdd:active {
+	position:relative;
+	top:1px;
+	outline:0;
+}
+
+.myButton /* för delete knappen */
+{
+	-moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+	box-shadow:inset 0px 1px 0px 0px #cf866c;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+	background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+	background-color:#d0451b;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #942911;
+	display:inline-block;
+	outline:0;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #854629;
+	outline:0;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
+	background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bc3315', endColorstr='#d0451b',GradientType=0);
+	background-color:#bc3315;
+	outline:0;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+	outline:0;
+}

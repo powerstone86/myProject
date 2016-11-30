@@ -1,0 +1,44 @@
+<head>
+	<title id="title" translate="no" class="notranslate">{{currentLanguage.title}}</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,
+	width=device-width, height=device-height, target-densitydpi=device-dpi" />
+</head>
+
+<h1 align="center" id="searchMainText" translate="no" class="notranslate">{{currentLanguage.searchMainText}}</h1>
+<div style="heigth:20%;" OnLoad="document.textfield.focus();">
+<div ng-repeat="c in cities track by $index" align="center"></div>
+<center>
+<form ng-submit="getCity(searchTextCity)">
+<label><span id="searchCity" translate="no" class="notranslate">{{currentLanguage.searchCity}}</span><input type="text" ng-model="searchTextCity" autofocus required ng-show="searchTextCity.length != 0" /></label>
+<!--<input type="button" value="Show city" id="btn"
+		ng-click="getCity(searchTextCity)" ng-model="citybutton" />-->
+</form>
+<div id="info" align="center" style="display:none" ng-hide="!searchTextCity">
+<table>
+		<h4><span id="todaysTemp" translate="no" class="notranslate">{{currentLanguage.todaysTemp}}</span> {{cities.name}}:</h4>
+
+		<tr>
+		<td><img ng-src="http://openweathermap.org/img/w/{{ cities.weather[0].icon }}.png" /></td>
+		<td><p>{{cities.weather[0].description}} <span id="weatherText" translate="no" class="notranslate">{{currentLanguage.weatherText}}</span> </p></td>
+		<td><p id="temp" ng-class="getTemperatureClass(cities.main.temp)">{{cities.main.temp  + "°C"}} </p></td>
+		</tr>
+		
+</table>
+
+<!--<p>{{cities.name}}</p> 
+<p><img ng-src="http://openweathermap.org/img/w/{{ cities.weather[0].icon }}.png" /> {{cities.weather[0].description}}</p>
+<p></p><p id="te" ng-class="getTemperatureClass(cities.main.temp)">{{cities.main.temp + "°C"}}</p>-->
+</div>
+
+<p ng-show="!searchTextCity"><span id="youNeedToSearch" translate="no" class="notranslate">{{currentLanguage.youNeedToSearch}}</span></p>
+<!--Show HTML: <input type="button" id="btn" ng-model="myVar" ng-click="toggle()" value="Show Me!" />-->
+
+<!--<label>Select a city</label>
+		<select id="depID" ng-model="selectCityID" ng-change="changedCityValue(selectCityID)"
+		ng-options="rec.id as rec.name for rec in rectCities">
+		<option value=""><label>-- Choose a city --</label></option>
+		</select>-->
+        <!--<div ng-repeat="cit in rectCities track by $index" align="center">{{cit}}</div>-->
+
+</center>
+</div>

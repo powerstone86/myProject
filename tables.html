@@ -1,0 +1,242 @@
+<head>
+	<title id="title">{{currentLanguage.title}}</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,
+	  width=device-width, height=device-height, target-densitydpi=device-dpi" />
+</head>
+
+<script>
+
+function lol()
+{
+    alert("kommit till lol");
+}
+</script>
+
+<h1 align="center" id="searchMainText">{{currentLanguage.searchMainText}}</h1>
+<div align="center" OnLoad="document.textfield.focus();">
+    <form ng-submit="getCityID(searchTextCity)">
+    <center>
+    <label><span id="searchCity">{{currentLanguage.searchCity}}</span><input type="text" ng-model="searchTextCity" autofocus required ng-show="searchTextCity.length != 0" /></label>
+    </form>
+</div>
+ <center><p><span id="latestSearched">{{currentLanguage.latestSearched}}</span> {{searchedCities}}</p></center>
+</br>
+ <center><span ng-hide="!searchTextCity"><span id="14">{{currentLanguage.fourteen}}</span> <input type="button" id="btnShowWeather" ng-model="showWeather14Days" ng-click="toggle()" value="Show">
+</span></center>
+<!--<div align="center" ng-show="showWeather14Days">-->
+     
+  <!--<div class="alert alert-info">
+    <p>Sort Type: {{ sortType }}</p>
+    <p>Sort Reverse: {{ sortReverse }}</p>
+    <p>Search Query: {{ searchQuery }}</p>
+  </div>-->
+ </br>
+   <!--<h2 id="weather14Days">{{currentLanguage.weather14Days}}</h2>
+    <center><span id="updated">{{currentLanguage.updated}}</span><p>{{cityName.dt | lastUpdate}}</p></center>
+  <form>
+    <p><h3>{{weatherTwoWeeksCity.city.name}}</h3></p>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+       <input type="text" class="form-control" name="search14" placeholder="" ng-model="searchQuery">
+      </div>      
+    </div>
+  </form>
+
+    <table class="table table-bordered table-striped">
+    
+    <thead id="sortLables">
+      <tr>
+         <td>
+          <a href="#/tables" ng-click="sortType = 'week'; sortReverse = !sortReverse">
+          <span id="tableWeek14">{{currentLanguage.tableWeek14}}</span>
+            <span ng-show="sortType == 'week' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'week' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+          <span id="tableDate14">{{currentLanguage.tableDate14}}</span>
+            <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'weather'; sortReverse = !sortReverse">
+         <span id="tableWeather14">{{currentLanguage.tableWeather14}}</span>
+            <span ng-show="sortType == 'weather' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'weather' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'morning'; sortReverse = !sortReverse">
+         <span id="tableMorning14">{{currentLanguage.tableMorning14}}</span>
+            <span ng-show="sortType == 'morning' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'morning' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'day'; sortReverse = !sortReverse">
+         <span id="tableDay14">{{currentLanguage.tableDay14}}</span> 
+            <span ng-show="sortType == 'day' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'day' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'night'; sortReverse = !sortReverse">
+          <span id="tableNight14">{{currentLanguage.tableNight14}}</span>
+            <span ng-show="sortType == 'night' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'night' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>-->
+    
+    <!--<tbody>
+        <tr ng-repeat="c14 in weatherTwoWeeksCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" ng-init="index=$index">
+                 <td>{{c14.dt | week : index}}</td>
+                <td>{{c14.dt | secondsToDate}}</td>
+                <td><img ng-src="http://openweathermap.org/img/w/{{ c14.weather[0].icon }}.png" />
+                {{c14.weather[0].description}}</td>
+                 <td><p ng-class="getTemperatureClass(c14.temp.morn)">{{c14.temp.morn}}</p></td>
+                <td ng-click="" class="pointer" ng-model="cityData"
+                 id="city"><p ng-class="getTemperatureClass(c14.temp.day)">{{c14.temp.day}}</p></td>
+                <td><p ng-class="getTemperatureClass(c14.temp.night)">{{c14.temp.night}}</p></td>
+      </tr>
+    </tbody>
+    
+  </table>-->
+<!--</div>-->
+
+<!-- vädret för 7 dagar -->
+<div id="info" align="center" style="display:block" ng-hide="!searchTextCity">
+
+    <!--<pre>{{citiesOfSweden.list[0].name}}</pre>
+    <table border="1" align="center">
+        Städer:
+        <tr ng-repeat="city in citiesOfSweden.list">
+            <td><img ng-src="http://openweathermap.org/img/w/{{ city.weather[0].icon }}.png" /></td>
+            <td>city</td>
+        </tr>
+    </table>-->
+
+    <!--<p>Filter by:
+    <select ng-model="queryBy">
+                    <option value="$">Select a filter</option>
+                    <option value="dag">Day</option>   
+                    <option calue="natt">Night</option>
+                    <option value="0">Temperature</option>
+                </select> 
+
+    <div class="alert alert-info">
+    <p>Sort Type: {{ sortType }}</p>
+    <p>Sort Reverse: {{ sortReverse }}</p>
+    <p>Search Query: {{ searchQuery }}</p>
+  </div>-->
+
+   <h2 id="weather7Days">{{currentLanguage.weather7Days}}</h2> 
+   <center><span id="updated">{{currentLanguage.updated}}</span><p>{{cityName.dt | lastUpdate}}</p></center>
+  
+  <form>
+        <p><h3>{{weatherSevenDaysCity.city.name}}</h3></b>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <!--<input type="search" class="form-control" id="search-1" value="" name="search" placeholder="" ng-model="searchQuery">-->
+        <input type="text" class="form-control" name="search7" placeholder="" ng-model="searchQuery">
+      </div>      
+    </div>
+  </form>
+
+    <table class="table table-bordered table-striped">
+    
+    <thead id="sortLables">
+      <tr>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'week'; sortReverse = !sortReverse">
+          <span id="tableWeek7">{{currentLanguage.tableWeek7}}</span>
+            <span ng-show="sortType == 'week' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'week' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+            <a href="#/tables" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+            <span id="tableDate7">{{currentLanguage.tableDate7}}</span>
+            <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'weather'; sortReverse = !sortReverse">
+            <span id="tableWeather7">{{currentLanguage.tableWeather7}}</span>
+            <span ng-show="sortType == 'weather' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'weather' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'morning'; sortReverse = !sortReverse">
+            <span id="tableMorning7">{{currentLanguage.tableMorning7}}</span>
+            <span ng-show="sortType == 'morning' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'morning' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'day'; sortReverse = !sortReverse">
+         <span id="tableDay7">{{currentLanguage.tableDay7}}</span> 
+            <span ng-show="sortType == 'day' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'day' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/tables" ng-click="sortType = 'night'; sortReverse = !sortReverse">
+         <span id="tableNight7">{{currentLanguage.tableNight7}}</span>
+            <span ng-show="sortType == 'night' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'night' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <!--<tr ng-repeat="c in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" ng-init="index=$index" weather-row-data weather-data="c" >--> <!-- Filtrerar så att man bara söker på väder description -->
+      <!--<tr ng-repeat="weatherData in weatherSevenDaysCity.list" weather-row weather-data="weatherData">-->
+        <tr ng-repeat="weatherData in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" index="{{$index}}" weather-row-data weather-data="weatherData" >
+
+  <!-- Modal -->
+  <!--<div class="modal fade" id="myModal" role="dialog" style="position:relative">
+    <div class="modal-dialog">-->
+    
+      <!-- Modal content-->
+     <!--<div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <p>Väder information:</p>
+           <input type="text" name="weatherID" id="weatherID" value="Info" disabled/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>-->
+
+      </tr>
+    </tbody>
+    
+  </table>
+
+  <!-- Trigger the modal with a button -->
+ <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+</div>
+
+<script>
+ $(document).on("click", ".open-weatherInfo", function () 
+ {
+     var weather = $(this).data('id');
+     $(".modal-body #weatherID").val(weather);
+ });
+</script

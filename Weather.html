@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title id="title" class="translation">{{currentLanguage.title}}</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,
+	width=device-width, height=device-height, target-densitydpi=device-dpi" />
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+
+
+<link href="CSS/weatherCSS.css" rel='stylesheet' />
+<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="icon" 
+      type="image/png" 
+      href="favicon.png">
+
+<script src="angular.js"></script>
+<script src="angular-route.js"></script>
+<script src="app.js"></script>
+<script src="mainController.js"></script>
+<script src="cityController.js"></script>
+<script src="tablesController.js"></script>
+<script src="jquery/jquery.min.js"></script>
+
+<script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+<!--<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="jquery/jquery.mobile-1.4.5.min.js"></script>-->
+
+<body id="bodyColor">
+
+<div ng-app="app" ng-controller="mainController" style="background-color: lightblue;"> 
+
+<script type="text/javascript">
+var userLang = navigator.language || navigator.userLanguages;
+//var userLanguage = google.translate.TranslateElement().a.sd;
+/*if (userLang.substr(0,2) != "en"){*/
+ /*function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'af,am,ar,az,be,bg,bn,bs,ca,ceb,co,cs,cy,da,de,el,eo,es,et,eu,fa,fr,fy,ga,gd,gl,gu,ha,haw,hi,hmn,hr,ht,hu,hy,id,ig,is,it,iw,ja,jv,ka,kk,km,kn,ko,ku,ky,la,lb,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,no,ny,pa,pl,ps,pt,ro,ru,sd,si,sk,sl,sm,sn,so,sq,sr,su,sw,ta,te,tg,th,tl,tr,uk,ur,uz,vi,xh,yi,yo,zh-CN,zh-TW,zu', multilanguagePage: true}, 'google_translate_element');
+ }*/
+ function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+ /*}
+else { 
+  document.getElementById("google_translate_element").style.display="none";
+  }*/
+ </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+ 
+
+<center><h1 style="color:black;" id="mainHeader">{{currentLanguage.mainHeader}}</h1></center>
+</br>
+<div id="google_translate_element" align="center">
+<button id="del"class="myButton" ng-click="deleteCookie('googtrans')" align="right">{{currentLanguage.del}}</button>
+</div>
+</br>
+<center><span id="browserLanguage" class="t">{{currentLanguage.browserLanguage}}</span> {{browserLang}}</center>
+</br>
+<center>
+<ul class="nav" droppable="true" ondrop="drop(event)" ondragover="allowDrop(event)">
+<hr>
+<a href="#/"><button id="main"class="buttonAdd" draggable="true"ondragstart="drag(event)" class="translation">{{currentLanguage.main}}</button></a>
+<a href="#/city"><button id="city"class="buttonAdd" class="translation">{{currentLanguage.city}}</button></a>
+<a href="#/tables"><button id="forecast"class="buttonAdd" draggable="true" ng-draggable='dragOptions' ondragstart="drag(event)" class="t">{{currentLanguage.forecast}}</button></a>
+<hr> 
+
+</ul>
+</center>
+	<center>
+	<marquee behavior="scroll" bgcolor="" loop="-1" width="20%"><i><font color="purple">
+	<strong id="todaysDate" class="translation">{{currentLanguage.todaysDate}}</strong><span id="date"> {{currentDate}}</span></font>
+	</marquee></center>
+	<div ng-view></div>
+	<center>
+	<h2 id="currentnWeather" class="translation">{{currentLanguage.currentnWeather}}</h2> 
+	<table>
+		<tr>
+		<td><img ng-src="http://openweathermap.org/img/w/{{ city.weather[0].icon }}.png" /></td>
+		<td><p>{{city.weather[0].description}} <span id="weatherText" class="tr">{{currentLanguage.weatherText}}</span></p></td>
+		<td><p id="temp" ng-class="getTemperatureClass(city.main.temp)">{{city.main.temp  + "°C"}} </p></td>
+		</tr>
+	</table>
+	</center>
+</div>
+
+</body>
+</html>
+
+<script>
+/*function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+	document.getElementById("city").addEventListener("click", function()
+	{
+		//document.getElementById("city").onClick = alert("Klickat!");
+	});
+	console.log("har dragit mig")
+
+}*/
+</script>
