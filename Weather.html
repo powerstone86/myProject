@@ -1,38 +1,49 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" ng-controller="mainController">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+	<link href="CSS/weatherCSS.css" rel="stylesheet">
+	<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+	<link rel="icon" 
+      type="image/png" 
+      href="favicon.png" />
+	  <script src="angular.js"></script>
+	  <script src="angular-route.js"></script>
+	  <script src="app.js"></script>
+	  <script src="mainController.js"></script>
+	  <script src="cityController.js"></script>
+	  <script src="tablesController.js"></script>
+	  <script src="jquery/jquery.min.js"></script>
+	  <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
 	<title>{{currentLanguage.title}}</title>
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,
 	width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
-	
-
-<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
-
-
-<link href="CSS/weatherCSS.css" rel='stylesheet' />
-<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+</head>
+<!--
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="icon" 
-      type="image/png" 
-      href="favicon.png">
 
-<script src="angular.js"></script>
-<script src="angular-route.js"></script>
-<script src="app.js"></script>
-<script src="mainController.js"></script>
-<script src="cityController.js"></script>
-<script src="tablesController.js"></script>
-<script src="jquery/jquery.min.js"></script>
 
-<script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
 
  <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+  <script src="jquery-ui-1.12.1/jquery-ui.js"></script>-->
 
-</head>
+
+
+<style>
+  .draggable { width: 90px; height: 80px; padding: 5px; float: left; margin: 0 10px 10px 0; font-size: .9em; }
+  .ui-widget-header p, .ui-widget-content p { margin: 0; }
+  #snaptarget { height: 140px; }
+  </style>
+
+   <script>
+  $( function() 
+  {
+    $( "#main" ).draggable({ snap: ".ui-widget-header" });
+  } );
+  </script>
 
 
 <!--<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
@@ -41,7 +52,7 @@
 
 <body id="bodyColor">
 
-<div ng-controller="mainController" style="background-color: lightblue;"> 
+<div style="background-color: lightblue;"> 
 
 <script type="text/javascript">
 var userLang = navigator.language || navigator.userLanguages;
@@ -50,7 +61,8 @@ var userLang = navigator.language || navigator.userLanguages;
  /*function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'af,am,ar,az,be,bg,bn,bs,ca,ceb,co,cs,cy,da,de,el,eo,es,et,eu,fa,fr,fy,ga,gd,gl,gu,ha,haw,hi,hmn,hr,ht,hu,hy,id,ig,is,it,iw,ja,jv,ka,kk,km,kn,ko,ku,ky,la,lb,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,no,ny,pa,pl,ps,pt,ro,ru,sd,si,sk,sl,sm,sn,so,sq,sr,su,sw,ta,te,tg,th,tl,tr,uk,ur,uz,vi,xh,yi,yo,zh-CN,zh-TW,zu', multilanguagePage: true}, 'google_translate_element');
  }*/
- function googleTranslateElementInit() {
+ function googleTranslateElementInit() 
+ {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
 }
  /*}
@@ -68,12 +80,13 @@ else {
 <center><span id="browserLanguage" class="t">{{currentLanguage.browserLanguage}}</span> {{browserLang}}</center>
 </br>
 <center>
-<ul class="nav" droppable="true" ondrop="drop(event)" ondragover="allowDrop(event)">
-<hr>
-<a href="#/"><button id="main"class="buttonAdd" draggable="true"ondragstart="drag(event)" class="translation" ng-click="showDragable()">{{currentLanguage.main}}</button></a>
+<ul class="nav" id="snaptarget" class="ui-widget-header">
+<hr >
+<a href="#/"><button id="main"class="buttonAdd" class="draggable ui-widget-content" class="translation" ng-click="showDragable()">{{currentLanguage.main}}</button></a>
 <a href="#/city"><button id="city"class="buttonAdd" class="translation">{{currentLanguage.city}}</button></a>
 <a href="#/tables"><button id="forecast"class="buttonAdd" draggable="true" ng-draggable='dragOptions' ondragstart="drag(event)" class="t">{{currentLanguage.forecast}}</button></a>
 <hr> 
+</ul>
 
 </ul>
 </center>
