@@ -41,7 +41,7 @@
    <script>
   $( function() 
   {
-    $( "#main" ).draggable({ snap: ".ui-widget-header" });
+    //$( "#draggable2" ).draggable({ snap: ".ui-widget-header" });
   } );
   </script>
 
@@ -53,6 +53,14 @@
 <body id="bodyColor">
 
 <div style="background-color: lightblue;"> 
+
+		<div id="snaptarget" class="ui-widget-header">
+  <p>I'm a snap target</p>
+</div>
+
+	<div id="draggable2" class="draggable ui-widget-content">
+  <p>I only snap to the big box</p>
+</div>
 
 <script type="text/javascript">
 var userLang = navigator.language || navigator.userLanguages;
@@ -80,7 +88,8 @@ else {
 <center><span id="browserLanguage" class="t">{{currentLanguage.browserLanguage}}</span> {{browserLang}}</center>
 </br>
 <center>
-<ul class="nav" id="snaptarget" class="ui-widget-header">
+
+<ul class="nav">
 <hr >
 <a href="#/"><button id="main"class="buttonAdd" class="draggable ui-widget-content" class="translation" ng-click="showDragable()">{{currentLanguage.main}}</button></a>
 <a href="#/city"><button id="city"class="buttonAdd" class="translation">{{currentLanguage.city}}</button></a>
