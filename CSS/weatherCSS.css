@@ -11,6 +11,7 @@ font-family: arial, verdana, sans-serif;
 	 height: 200px;
 	 padding: 0.5em;  
     position:absolute;
+	background-color: white;
     left: 50%;
     top: 30%;
 	cursor: move;
