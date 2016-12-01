@@ -16,6 +16,7 @@
 <link rel="icon" 
       type="image/png" 
       href="favicon.png">
+<link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
 
 <script src="angular.js"></script>
 <script src="angular-route.js"></script>
@@ -25,7 +26,12 @@
 <script src="tablesController.js"></script>
 <script src="jquery/jquery.min.js"></script>
 
+ 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+
 <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
 
 <!--<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -50,7 +56,6 @@ else {
   document.getElementById("google_translate_element").style.display="none";
   }*/
  </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
- 
 
 <center><h1 style="color:black;" id="mainHeader">{{currentLanguage.mainHeader}}</h1></center>
 </br>
@@ -63,7 +68,7 @@ else {
 <center>
 <ul class="nav" droppable="true" ondrop="drop(event)" ondragover="allowDrop(event)">
 <hr>
-<a href="#/"><button id="main"class="buttonAdd" draggable="true"ondragstart="drag(event)" class="translation">{{currentLanguage.main}}</button></a>
+<a href="#/"><button id="main"class="buttonAdd" draggable="true"ondragstart="drag(event)" class="translation" ng-click="showDragable()">{{currentLanguage.main}}</button></a>
 <a href="#/city"><button id="city"class="buttonAdd" class="translation">{{currentLanguage.city}}</button></a>
 <a href="#/tables"><button id="forecast"class="buttonAdd" draggable="true" ng-draggable='dragOptions' ondragstart="drag(event)" class="t">{{currentLanguage.forecast}}</button></a>
 <hr> 

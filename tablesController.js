@@ -133,6 +133,16 @@ app.controller('tablesController', function($scope, $http)
         );
      };
 
+    /*$scope.showDragable = function()
+	{
+		document.getElementById('draggable').style.display = "block";
+	}*/
+	$scope.closeDragable = function()
+	{
+		$("#draggable").removeAttr("style");
+		document.getElementById('draggable').style.display = "none";
+	}
+
     /*$scope.getIndex = function(index)
     {
         /*alert("Väderinformation " + "longitud = " + $scope.weatherSevenDaysCity.city.coord.lon + " " +
@@ -351,6 +361,53 @@ $scope.getCityID = function(city)
 			);
 }
 
+  var ALERT_TITLE = "WeatherInformation";
+  /*var ALERT_BUTTON_TEXT = "Close";
+
+if(document.getElementById) {
+    window.alert = function(txt) {
+        createCustomAlert(txt);
+    }
+}
+
+function createCustomAlert(txt) 
+{
+    d = document;
+
+    if(d.getElementById("modalContainer")) return;
+
+    mObj = d.getElementsByTagName("body")[0].appendChild(d.createElement("div"));
+    mObj.id = "modalContainer";
+    mObj.style.height = d.documentElement.scrollHeight + "px";
+
+    alertObj = mObj.appendChild(d.createElement("div"));
+    alertObj.id = "alertBox";
+    if(d.all && !window.opera) alertObj.style.top = document.documentElement.scrollTop + "px";
+    alertObj.style.left = (d.documentElement.scrollWidth - alertObj.offsetWidth)/2 + "px";
+    alertObj.style.visiblity="visible";
+
+    h1 = alertObj.appendChild(d.createElement("h1"));
+    h1.appendChild(d.createTextNode(ALERT_TITLE));
+
+    msg = alertObj.appendChild(d.createElement("p"));
+    //msg.appendChild(d.createTextNode(txt));
+    msg.innerHTML = txt;
+
+    btn = alertObj.appendChild(d.createElement("a"));
+    btn.id = "closeBtn";
+    btn.appendChild(d.createTextNode(ALERT_BUTTON_TEXT));
+    btn.href = "#";
+    btn.focus();
+    btn.onclick = function() { removeCustomAlert();return false; }
+
+    alertObj.style.display = "block";
+
+}
+
+function removeCustomAlert() {
+    document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
+}*/
+
 $scope.lastUpdateDate = function(lastUpdateDate)
 {
     var date = new Date(parseInt(lastUpdateDate)*1000).toLocaleDateString(lang);
@@ -382,19 +439,21 @@ app.directive('weatherRowData', function()
       index: "@" // "@" betyder ta emot sträng (index är ju bara ett värde, en sträng, inte ett objekt)
     },
     link: function(scope, element, attr) {
+    },
+    controller: function($scope, $element) {
 
-      //alert(scope.weatherData);
-      scope.getWeather = function()
+     $scope.getWeather = function()
       {
-          //alert(scope.weatherData.weather[scope.index].description);    ppproovhnajokdjhnke
+          //alert(scope.weatherData.weather[scope.index].description); 
           //alert(scope.index);
-          console.log(scope.index);
-          alert(scope.weatherData.weather[scope.index].description);
+          console.log($scope.index);
+          document.getElementById('draggable').style.display = "block";
+
+           // $(".modal-body #weatherID").val("Lufttryck: " + " " + $scope.weatherData.pressure + " " + "vindhastighet: " + " " + $scope.weatherData.speed + "m/s");
+         // alert("Lufttryck: " + " " + $scope.weatherData.pressure + " " + "vindhastighet: " + " " + $scope.weatherData.speed + "m/s");
+          
       }
     }
-    /*controller: function($scope, $element) {
-
-    }*/
     
   };
 

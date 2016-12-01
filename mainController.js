@@ -112,6 +112,16 @@ app.controller('mainController', function($scope, $http)
 	//getCookie('googtrans');
 	//setcookie('googtrans', language,'#googtrans(lang)'); 
 
+	/*$scope.showDragable = function()
+	{
+		document.getElementById('draggable').style.display = "block";
+	}
+	$scope.closeDragable = function()
+	{
+		$("#draggable").removeAttr("style");
+		document.getElementById('draggable').style.display = "none";
+	}*/
+
 
 	function readCookie(name)
 	{

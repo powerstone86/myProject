@@ -5,12 +5,13 @@
 </head>
 
 <script>
+  $( function() {
+    $( "#draggable" ).draggable({ scroll: true });
+	$( "#draggable" ).draggable({opacity: 0.35 });
+	$( "#draggable" ).draggable({scrollSpeed: 20})
+  } );
+  </script>
 
-function lol()
-{
-    alert("kommit till lol");
-}
-</script>
 
 <h1 align="center" id="searchMainText">{{currentLanguage.searchMainText}}</h1>
 <div align="center" OnLoad="document.textfield.focus();">
@@ -23,6 +24,7 @@ function lol()
 </br>
  <center><span ng-hide="!searchTextCity"><span id="14">{{currentLanguage.fourteen}}</span> <input type="button" id="btnShowWeather" ng-model="showWeather14Days" ng-click="toggle()" value="Show">
 </span></center>
+
 <!--<div align="center" ng-show="showWeather14Days">-->
      
   <!--<div class="alert alert-info">
@@ -30,7 +32,6 @@ function lol()
     <p>Sort Reverse: {{ sortReverse }}</p>
     <p>Search Query: {{ searchQuery }}</p>
   </div>-->
- </br>
    <!--<h2 id="weather14Days">{{currentLanguage.weather14Days}}</h2>
     <center><span id="updated">{{currentLanguage.updated}}</span><p>{{cityName.dt | lastUpdate}}</p></center>
   <form>
@@ -110,6 +111,11 @@ function lol()
 
 <!-- vädret för 7 dagar -->
 <div id="info" align="center" style="display:block" ng-hide="!searchTextCity">
+
+  <div id="draggable" class="ui-widget-content" style="display:none" >
+<button type="button" id="closeButtonDraggable" ng-click="closeDragable()">X</button>
+  <p>Drag me around</p>
+</div>
 
     <!--<pre>{{citiesOfSweden.list[0].name}}</pre>
     <table border="1" align="center">
@@ -200,34 +206,16 @@ function lol()
     <tbody>
       <!--<tr ng-repeat="c in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" ng-init="index=$index" weather-row-data weather-data="c" >--> <!-- Filtrerar så att man bara söker på väder description -->
       <!--<tr ng-repeat="weatherData in weatherSevenDaysCity.list" weather-row weather-data="weatherData">-->
-        <tr ng-repeat="weatherData in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" index="{{$index}}" weather-row-data weather-data="weatherData" >
-
-  <!-- Modal -->
-  <!--<div class="modal fade" id="myModal" role="dialog" style="position:relative">
-    <div class="modal-dialog">-->
-    
-      <!-- Modal content-->
-     <!--<div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <p>Väder information:</p>
-           <input type="text" name="weatherID" id="weatherID" value="Info" disabled/>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>-->
+      <tr ng-repeat="weatherData in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" index="{{$index}}" weather-row-data weather-data="weatherData" >
 
       </tr>
     </tbody>
     
   </table>
+
+  
+
+  
 
   <!-- Trigger the modal with a button -->
  <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
@@ -239,4 +227,5 @@ function lol()
      var weather = $(this).data('id');
      $(".modal-body #weatherID").val(weather);
  });
+
 </script

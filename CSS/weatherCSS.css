@@ -5,6 +5,20 @@ font-size: 85%;
 
 font-family: arial, verdana, sans-serif;
 }
+#draggable /* fönstret som man kan dra */
+ { 
+	 width: 200px; 
+	 height: 200px;
+	 padding: 0.5em;  
+    position:absolute;
+    left: 50%;
+    top: 30%;
+	cursor: move;
+ }
+#closeButtonDraggable
+{
+	margin-left: 160px;
+}
 
 .goog-te-banner-frame.skiptranslate {display: none !important;} 
 body { top: 0px !important; }
