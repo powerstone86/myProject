@@ -81,7 +81,8 @@ app.controller('mainController', function($scope, $http)
 	{
 			//document.querySelector("html").setAttribute("lang", "sv");
 			$scope.browserLang = "sv";
-			document.getElementById("title").innerHTML = "Väder 1.0";
+			//document.querySelector("title").innerHTML = "Väder 1.0";
+			//document.getElementById("title").innerHTML = "Väder 1.0";
 			addClassNoTranslationSwedish();
 			
 			
@@ -91,13 +92,13 @@ app.controller('mainController', function($scope, $http)
 	else if($scope.browserLang == "en-US" || $scope.browserLang == "en-GB" || $scope.browserLang == "en")
 	{
 			$scope.browserLang = "en";
-			document.getElementById("title").innerHTML = "Weather 1.0";
+			//document.getElementById("title").innerHTML = "Weather 1.0";
 			
 		$scope.currentLanguage = $scope.english; // sätter currentLanguage till svenska
 	}
 	else if($scope.browserLang == "fi") // om språket inte är engelska, svenska eller finska sätt som engelska 
 	{
-		document.getElementById("title").innerHTML = "Sää 1.0";
+		//document.getElementById("title").innerHTML = "Sää 1.0";
 		$scope.currentLanguage = $scope.finnish; 
 		// översätter till de språk som webläsaren har t.ex fr, nl etc och anger hur
 		// länge cookien ska vara tillgänglig

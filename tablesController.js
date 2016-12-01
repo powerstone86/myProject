@@ -25,7 +25,7 @@ app.controller('tablesController', function($scope, $http)
     if($scope.browserLang == "sv" || $scope.browserLang == "sv-SE" || $scope.browserLang == "sv-se" )
 	{
         $scope.browserLang = "sv";
-		document.getElementById("title").innerHTML = "Väder 1.0";
+		//document.getElementById("title").innerHTML = "Väder 1.0";
        // document.getElementsByName('search14')[0].placeholder='Sökfält';
         document.getElementsByName('search7')[0].placeholder='Sökfält';
         document.getElementById('btnShowWeather').value = "Visa";
@@ -57,7 +57,7 @@ app.controller('tablesController', function($scope, $http)
     else if($scope.browserLang == "en-US" || $scope.browserLang == "en-GB" || $scope.browserLang == "en")
 	{
         $scope.browserLang = "en";
-		document.getElementById("title").innerHTML = "Weather 1.0";
+		//document.getElementById("title").innerHTML = "Weather 1.0";
         //document.getElementsByName('search14')[0].placeholder='Searchfield';
         document.getElementsByName('search7')[0].placeholder='Searchfield';
 		$scope.english = { 
@@ -86,7 +86,7 @@ app.controller('tablesController', function($scope, $http)
 	}
     else if($scope.browserLang == "fi")
 	{
-		document.getElementById("title").innerHTML = "Sää 1.0";
+		//document.getElementById("title").innerHTML = "Sää 1.0";
        //document.getElementsByName('search14')[0].placeholder='Hakualue';
         document.getElementsByName('search7')[0].placeholder='Hakualue';
 		$scope.finnish = {   
