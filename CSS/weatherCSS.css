@@ -119,11 +119,20 @@ hr {
 	cursor: pointer;
 }
 
-
-#selectedWeather:hover /* när man är över vädret med muspekaren */
+.selectedWeather 
 {
 	background-color: #D8B0FF;
 }
+
+weatherTD:hover
+{
+	background-color: #D8B0FF;
+}
+#sel:hover
+{
+	background-color: #D8B0FF;
+}
+
 
 /* ---- Button Add ---- */
 

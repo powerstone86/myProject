@@ -241,6 +241,9 @@ app.controller('mainController', function($scope, $http)
 
 		 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
+		var res = lang.replace(/[-].*/g, ""); // Regexp - /[-].*/g  ersätt alla strängar som har -tecken till "" så blir det första delen av strängen t.ex sv-SE blir sv 
+        //var localeString = date.toLocaleDateString(res,options);
+
 		 if(isSafari == true)
 		 {
 			 //var dat = new Date().toLocaleDateString(dateLanguage,options);
@@ -249,7 +252,7 @@ app.controller('mainController', function($scope, $http)
 		if((navigator.userAgent.indexOf("MSIE") != -1  || (!!document.documentMode == true )) // if IE ver > 10
 		|| document.documentMode == false) // om IE inte är version 10
 		{
-			var d = new Date().toLocaleDateString(dateLanguage,options);
+			//var d = new Date().toLocaleDateString(dateLanguage,options);
 	
 			/*if(dateLanguage == "sv")
 			{
@@ -270,9 +273,10 @@ app.controller('mainController', function($scope, $http)
 				var newDate = thisWeekDay + " " + "den" + " " + year + "-" + month + "-" + day;
 				return newDate;
 			}*/
-			return d;
+			//return d;
 		}
-		var date = new Date().toLocaleDateString(dateLanguage,options);
+		var date = new Date().toLocaleDateString(res,options);
+		
         return date; 
 	}
 

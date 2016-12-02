@@ -186,7 +186,7 @@
     <tbody>
       <!--<tr ng-repeat="c in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" ng-init="index=$index" weather-row-data weather-data="c" >--> <!-- Filtrerar så att man bara söker på väder description -->
       <!--<tr ng-repeat="weatherData in weatherSevenDaysCity.list" weather-row weather-data="weatherData">-->
-      <tr ng-repeat="weatherData in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" index="{{$index}}" weather-row-data weather-data="weatherData" >
+      <tr ng-repeat="weatherData in weatherSevenDaysCity.list | orderBy:sortType:sortReverse | filter:{weather:{description:searchQuery}}" index="{{$index}}" weather-row-data weather-data="weatherData" parent-data="sharedWithWeatherRow">
 
       </tr>
     </tbody>

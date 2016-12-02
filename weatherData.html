@@ -1,9 +1,9 @@
 <td>{{weatherData.dt | week : index}}</td>
   <td>{{weatherData.dt | secondsToDate}}</td>
-     <td id="selectedWeather" class="pointer" class="weather"
+     <td class="pointer" id="sel" class="selectedWeather" class="weatherTD"
          ng-click="getWeather($event)" class="open-weatherInfo btn btn-primary"><img ng-src="http://openweathermap.org/img/w/{{ weatherData.weather[0].icon }}.png" />
              {{weatherData.weather[0].description}}</td>
-             <td><!--Temperatur morgon:--> <p ng-class="getTemperatureClass(weatherData.temp.morn)">{{weatherData.temp.morn}}</p></td>
+             <td><!--Temperatur morgon:--> <p ng-class="WeatherClassService.getTemperatureClass(weatherData.temp.morn)">{{weatherData.temp.morn}}</p></td>
                 <td ng-model="cityData"
-                  id="city"><!--Temperatur dag:--> <p ng-class="getTemperatureClass(weatherData.temp.day)">{{weatherData.temp.day}}</p></td>
-                   <td><!--Temperatur natt:--> <p ng-class="getTemperatureClass(weatherData.temp.night)">{{weatherData.temp.night}}</p></td>
+                  id="city"><!--Temperatur dag:--> <p ng-class="WeatherClassService.getTemperatureClass(weatherData.temp.day)">{{weatherData.temp.day}}</p></td>
+                   <td><!--Temperatur natt:--> <p ng-class="WeatherClassService.getTemperatureClass(weatherData.temp.night)">{{weatherData.temp.night}}</p></td>

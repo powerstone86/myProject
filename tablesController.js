@@ -1,4 +1,4 @@
-app.controller('tablesController', function($scope, $http) 
+app.controller('tablesController', function($scope, $http, WeatherClassService) // WeatherClassService är min egna service som jag gjort längst ner i koden 
 {
      var lang = navigator.language || navigator.userLanguage || navigator.systemLanguage;
      $scope.browserLang = lang;
@@ -20,6 +20,14 @@ app.controller('tablesController', function($scope, $http)
      $scope.searchQuery   = '';     // set the default search/filter term
      $scope.currentLanguage = $scope.english;    // default är engelska   
      $scope.cnt = "";   // för att visa 7 / 14 dagar väder  
+
+     $scope.WeatherClassService = WeatherClassService;
+     console.log($scope.WeatherClassService.getTemperatureClass(-5));
+
+     $scope.sharedWithWeatherRow =
+     {
+        selectedTD: null
+     }
 
     if($scope.browserLang == "sv" || $scope.browserLang == "sv-SE" || $scope.browserLang == "sv-se" )
 	{
@@ -143,28 +151,14 @@ app.controller('tablesController', function($scope, $http)
     $( "#draggable" ).draggable({ cursor: "move", cursorAt: { top: dragHeight, left: dragWidth } });
     $( "#draggable" ).draggable({ scroll: true });
     $( "#draggable" ).draggable({scrollSpeed: 20})
-	$scope.closeDragable = function()
+	
+    $scope.closeDragable = function()
 	{
-		$("#draggable").removeAttr("style");
-        $("#selectedWeather").css("background-color", "");
-        //document.getElementsByClassName('selected').style.backgroundColor = "";
-		document.getElementById('draggable').style.display = "none";
-	}
-
-     /*$scope.showPopup = function(myE) 
-     {
-        $scope.x = myE.clientX;
-        $scope.y = myE.clientY;
-        $scope.mousecoord = "X:" + $scope.x + " " + "Y:" + $scope.y;
-    }*/
-
-    /*$scope.getIndex = function(index)
-    {
-        /*alert("Väderinformation " + "longitud = " + $scope.weatherSevenDaysCity.city.coord.lon + " " +
-        "latitud = " + $scope.weatherSevenDaysCity.city.coord.lat);*/
-        //var intIndex = parseInt(index);
-        //console.log("Väderinformation " + $scope.weatherSevenDaysCity.city.list[1].pressure);
-    //}
+         $("#draggable").removeAttr("style");
+         $scope.sharedWithWeatherRow.selectedTD.classList.remove('selectedWeather');
+         $scope.sharedWithWeatherRow.selectedTD = null;
+         document.getElementById('draggable').style.display = "none";
+   }
 
      $scope.toggle = function() 
      {
@@ -176,6 +170,8 @@ app.controller('tablesController', function($scope, $http)
             document.getElementById('btnShowWeather').value = "Göm";
             else if($scope.browserLang != "sv" || $scope.browserLang!= "sv-SE" || $scope.browserLang != "sv-se")
             document.getElementById('btnShowWeather').value = "Hide";
+            if(document.getElementById('draggable').style.display = "block")
+            document.getElementById('draggable').style.display = "none";
 
             $scope.cnt = 14;
             getSevenDaysWeatherForCurrentLanguage($scope.cityName.id, $scope.cnt);
@@ -190,6 +186,8 @@ app.controller('tablesController', function($scope, $http)
             document.getElementById('btnShowWeather').value = "Visa";
             else if($scope.currentLanguage != "sv" || $scope.currentLanguage != "sv-SE" || $scope.currentLanguage != "sv-se")
             document.getElementById('btnShowWeather').value = "Show";
+            if(document.getElementById('draggable').style.display = "block")
+            document.getElementById('draggable').style.display = "none";
 
             $scope.cnt = 7;
             getSevenDaysWeatherForCurrentLanguage($scope.cityName.id, $scope.cnt);
@@ -296,53 +294,6 @@ $scope.getCityID = function(city)
 			);
 }
 
-  var ALERT_TITLE = "WeatherInformation";
-  /*var ALERT_BUTTON_TEXT = "Close";
-
-if(document.getElementById) {
-    window.alert = function(txt) {
-        createCustomAlert(txt);
-    }
-}
-
-function createCustomAlert(txt) 
-{
-    d = document;
-
-    if(d.getElementById("modalContainer")) return;
-
-    mObj = d.getElementsByTagName("body")[0].appendChild(d.createElement("div"));
-    mObj.id = "modalContainer";
-    mObj.style.height = d.documentElement.scrollHeight + "px";
-
-    alertObj = mObj.appendChild(d.createElement("div"));
-    alertObj.id = "alertBox";
-    if(d.all && !window.opera) alertObj.style.top = document.documentElement.scrollTop + "px";
-    alertObj.style.left = (d.documentElement.scrollWidth - alertObj.offsetWidth)/2 + "px";
-    alertObj.style.visiblity="visible";
-
-    h1 = alertObj.appendChild(d.createElement("h1"));
-    h1.appendChild(d.createTextNode(ALERT_TITLE));
-
-    msg = alertObj.appendChild(d.createElement("p"));
-    //msg.appendChild(d.createTextNode(txt));
-    msg.innerHTML = txt;
-
-    btn = alertObj.appendChild(d.createElement("a"));
-    btn.id = "closeBtn";
-    btn.appendChild(d.createTextNode(ALERT_BUTTON_TEXT));
-    btn.href = "#";
-    btn.focus();
-    btn.onclick = function() { removeCustomAlert();return false; }
-
-    alertObj.style.display = "block";
-
-}
-
-function removeCustomAlert() {
-    document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
-}*/
-
 $scope.lastUpdateDate = function(lastUpdateDate)
 {
     var date = new Date(parseInt(lastUpdateDate)*1000).toLocaleDateString(lang);
@@ -371,6 +322,7 @@ app.directive('weatherRowData', function()
     templateUrl: "weatherData.html",
     scope: {
       weatherData: '=', // "=" betyder ta emot objekt (som weatherData)
+      parentData: '=',
       index: "@" // "@" betyder ta emot sträng (index är ju bara ett värde, en sträng, inte ett objekt)
     },
     link: function(scope, element, attr) {
@@ -379,19 +331,50 @@ app.directive('weatherRowData', function()
 
      $scope.getWeather = function(myEv)
       {
-          //document.getElementById('selectedWeather').style.backgroundColor = "#D8B0FF";
-          $("#selectedWeather").css("background-color", "#D8B0FF");
-          //console.log( $( "#selectedWeather" ).get( $scope.index )); 
+
+         if($scope.parentData.selectedTD != null) 
+         {
+            $scope.parentData.selectedTD.classList.remove("selectedWeather");
+         }
+
+         $scope.parentData.selectedTD = myEv.target;
+          
+         myEv.target.classList.add("selectedWeather");
+         //myEv.target.classList.remove("weatherTD");
+         
           console.log($scope.index);
-          //console.log($event);
           $scope.x = myEv.clientX;
           $scope.y = myEv.clientY;
-          console.log($scope.x + " " + $scope.y);
         
           document.getElementById('draggable').style.display = "block";
           $('#draggable').css('position', 'absolute');
           document.getElementById('draggable').style.top = $scope.y+"px"; 
           document.getElementById('draggable').style.left = $scope.x+"px"; 
+
+          
+          
+           /*$("#closeButtonDraggable").click(function(){
+            $(this).data('clicked', true);
+            if($(this).data('clicked') == true)
+            {
+                console.log($(this).data('clicked'));
+                $scope.parentData.tdClicked = false;
+            }
+            else
+            {
+                 $(this).data('clicked', false);
+                console.log("LOL");
+                document.getElementById('draggable').style.display = "none";
+                myEv.target.classList.remove("selectedWeather");
+            }
+
+          });
+
+          //console.log($('#closeButtonDraggable').data('clicked'));
+          /*if($('#closeButtonDraggable').data('clicked')) {
+         }
+         else*/
+
           //$('#draggable').css('top', $scope.x); //or wherever you want it
           //$('#draggable').css('right', $scope.y); //or wherever you want it
           //$("#draggable").offset({ top: $scope.x, left: $scope.y});
@@ -403,8 +386,6 @@ app.directive('weatherRowData', function()
          var clickedDate = $filter('secondsToDate')(currentClickedDate);
          document.getElementById('popupText').innerHTML = "<p>" + clickedDate + "<p>" + "<p>" + "Lufttryck: " + " " + $scope.weatherData.pressure
          + "<p>" + " Vindhastighet: " + " " + $scope.weatherData.speed + "m/s";
-
-         // alert("Lufttryck: " + " " + $scope.weatherData.pressure + " " + "vindhastighet: " + " " + $scope.weatherData.speed + "m/s");
           
       }
     }
@@ -424,8 +405,9 @@ app.filter('secondsToDate',function() // en filter som filtrerar datum ifrån ti
     return function(secondsAsString)
     {
         var lang = navigator.language || navigator.userLanguage || navigator.systemLanguage;
-        var date = new Date(parseInt(secondsAsString)*1000);
-        var localeString = date.toLocaleDateString(lang,options);
+        var date = new Date(parseInt(secondsAsString)*1000);       
+        var res = lang.replace(/[-].*/g, ""); // Regexp - /[-].*/g  ersätt alla strängar som har -tecken till "" så blir det första delen av strängen t.ex sv-SE blir sv 
+        var localeString = date.toLocaleDateString(res,options);
         var d = localeString;
         return d;
     } 
@@ -446,6 +428,8 @@ app.filter('lastUpdate',function() // en filter som filtrerar datum ifrån tiden
         var lang = navigator.language || navigator.userLanguage || navigator.systemLanguage;
         var date = new Date(parseInt(secondsAsString)*1000);
         var localeString = date.toLocaleDateString(lang,options);
+        var res = lang.replace(/[-].*/g, ""); // Regexp - /[-].*/g  ersätt alla strängar som har -tecken till "" så blir det första delen av strängen t.ex sv-SE blir sv 
+        var localeString = date.toLocaleDateString(res,options);
         var d = localeString;
         /*if($scope.getCityID() == null) // om man inte sökt på en stad
         return;*/
@@ -479,5 +463,27 @@ app.filter('week',function($filter) // en filter som filtrerar datum ifrån tide
             
         return d;
     }  
+
+});
+
+app.service("WeatherClassService", function() 
+{
+    this.getTemperatureClass = function(temp)
+    {
+        console.log("kommit in i getTemperatureClass");
+        if(temp < 1 && temp > -10) 
+		return "coldTemperature"; // retunerar namn på en klass, som man kan använda i CSS
+		if(temp < -9 && temp > -20)
+		return "colderTemperature";
+		if(temp < -19)
+		return "coldestTemperature";
+
+		if(temp > 0 && temp < 10)
+		return "warmTemperature";
+		if(temp > 9 && temp < 20)
+		return "warmerTemperature";
+	    if(temp > 19)
+		return "warmestTemperature";
+    }
 
 });
