@@ -37,7 +37,7 @@ app.controller('mainController', function($scope, $http)
 			currentnWeather: "Todays weather in Enköping",
 			todaysDate: "Todays date:",
 			weatherText: "and the temperature is at",
-			del: "Delete cookies"
+			del: "Reset language"
 		};
 	$scope.swedish = { // scope objekt   sen skriv t.ex {{currentLanguage.title}}
 			title: "Väder 1.0",
@@ -49,7 +49,7 @@ app.controller('mainController', function($scope, $http)
 			currentnWeather: "Dagens väder i Enköping",
 			todaysDate: "Dagens datum:",
 			weatherText: "och temperaturen ligger på",
-			del: "Radera kakor"
+			del: "Återställ språk"
 		};
 	$scope.finnish = {   
 			title: "Sää 1.0",
@@ -61,20 +61,20 @@ app.controller('mainController', function($scope, $http)
 			currentnWeather: "Päivän säätieto Enköpingissä",
 			todaysDate: "Päiväys:",
 			weatherText: "ja lämpötila on",
-			del: "Poista keksit"
+			del: "Reset kieli"
 		};
 
 		function addClassNoTranslationSwedish()
 		{
 			document.getElementById("mainHeader").className = "notranslate";
-			/*document.getElementById("browserLanguage").className = "notranslate";
-			document.getElementById("main").className = "notranslate";
+			document.getElementById("browserLanguage").className = "notranslate";
+			/*document.getElementById("main").className = "notranslate";
 			document.getElementById("city").className = "notranslate";
-			document.getElementById("forecast").className = "notranslate";
+			document.getElementById("forecast").className = "notranslate";*/
 			document.getElementById("currentnWeather").className = "notranslate";
 			document.getElementById("todaysDate").className = "notranslate";
 			document.getElementById("weatherText").className = "notranslate";
-			document.getElementById("del").className = "notranslate";*/
+			document.getElementById("del").className = "notranslate";
 		}
 	
 	if($scope.browserLang == "sv" || $scope.browserLang == "sv-SE" || $scope.browserLang == "sv-se")

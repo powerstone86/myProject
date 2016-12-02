@@ -1,7 +1,7 @@
 <td>{{weatherData.dt | week : index}}</td>
   <td>{{weatherData.dt | secondsToDate}}</td>
-     <td data-toggle="modal" data-target="#myModal" data-id="weatherData" id="selectedWeather" class="pointer"
-         ng-click="getWeather()" class="open-weatherInfo btn btn-primary"><img ng-src="http://openweathermap.org/img/w/{{ weatherData.weather[0].icon }}.png" />
+     <td id="selectedWeather" class="pointer" class="weather"
+         ng-click="getWeather($event)" class="open-weatherInfo btn btn-primary"><img ng-src="http://openweathermap.org/img/w/{{ weatherData.weather[0].icon }}.png" />
              {{weatherData.weather[0].description}}</td>
              <td><!--Temperatur morgon:--> <p ng-class="getTemperatureClass(weatherData.temp.morn)">{{weatherData.temp.morn}}</p></td>
                 <td ng-model="cityData"

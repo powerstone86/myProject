@@ -1,13 +1,3 @@
-<script>
-  $( function() {
-    $( "#draggable" ).draggable({ scroll: true });
-	$( "#draggable" ).draggable({opacity: 0.35 });
-	$( "#draggable" ).draggable({scrollSpeed: 20})
-  $( "#draggable" ).draggable({ cursor: "move", cursorAt: { top: 56, left: 56 } });
-  } );
-  </script>
-
-
 <h1 align="center" id="searchMainText">{{currentLanguage.searchMainText}}</h1>
 <div align="center" OnLoad="document.textfield.focus();">
     <form ng-submit="getCityID(searchTextCity)">
@@ -107,11 +97,6 @@
 <!-- vädret för 7 dagar -->
 <div id="info" align="center" style="display:block" ng-hide="!searchTextCity">
 
-  <div id="draggable" class="ui-widget-content" style="display:none" >
-<button type="button" id="closeButtonDraggable" ng-click="closeDragable()">X</button>
-  <p>Drag me around</p>
-</div>
-
     <!--<pre>{{citiesOfSweden.list[0].name}}</pre>
     <table border="1" align="center">
         Städer:
@@ -131,7 +116,7 @@
 
     <div class="alert alert-info">
     <p>Sort Type: {{ sortType }}</p>
-    <p>Sort Reverse: {{ sortReverse }}</p>
+    <p>Sort Reverse: {{ sortReverse }}</p> 
     <p>Search Query: {{ searchQuery }}</p>
   </div>-->
 
@@ -205,6 +190,12 @@
 
       </tr>
     </tbody>
+
+      <div id="draggable" class="ui-widget-content" style="display:none" >
+      <button type="button" id="closeButtonDraggable" ng-click="closeDragable()"
+      class="myButton">X</button>
+      <p id="popupText" align="center" style="margin-top: 30px">text</p>
+      </div>
     
   </table>
 
@@ -215,12 +206,3 @@
   <!-- Trigger the modal with a button -->
  <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
 </div>
-
-<script>
- $(document).on("click", ".open-weatherInfo", function () 
- {
-     var weather = $(this).data('id');
-     $(".modal-body #weatherID").val(weather);
- });
-
-</script>

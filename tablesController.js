@@ -5,7 +5,6 @@ app.controller('tablesController', function($scope, $http)
 
 	$scope.cities = []; // sparar en array för arrayObjekt som t.ex weather
     $scope.weatherSevenDaysCity = [];
-    //$scope.weatherTwoWeeksCity = [];
     $scope.searchedCities = []; // sparar alla sökta städer som man sökt senast på
 
     $scope.query = {}; // innehåpller frågan för filtreringen
@@ -137,11 +136,27 @@ app.controller('tablesController', function($scope, $http)
 	{
 		document.getElementById('draggable').style.display = "block";
 	}*/
+
+    $( "#draggable" ).draggable({opacity: 0.35 });
+    var dragWidth = $( "#draggable" ).width() / 2;
+    var dragHeight = $( "#draggable" ).height() / 2;
+    $( "#draggable" ).draggable({ cursor: "move", cursorAt: { top: dragHeight, left: dragWidth } });
+    $( "#draggable" ).draggable({ scroll: true });
+    $( "#draggable" ).draggable({scrollSpeed: 20})
 	$scope.closeDragable = function()
 	{
 		$("#draggable").removeAttr("style");
+        $("#selectedWeather").css("background-color", "");
+        //document.getElementsByClassName('selected').style.backgroundColor = "";
 		document.getElementById('draggable').style.display = "none";
 	}
+
+     /*$scope.showPopup = function(myE) 
+     {
+        $scope.x = myE.clientX;
+        $scope.y = myE.clientY;
+        $scope.mousecoord = "X:" + $scope.x + " " + "Y:" + $scope.y;
+    }*/
 
     /*$scope.getIndex = function(index)
     {
@@ -252,86 +267,6 @@ app.controller('tablesController', function($scope, $http)
                 );
     }
 
-    /*function getSevenDaysWeather(cityID)
-    {   
-            $http.get("http://api.openweathermap.org/data/2.5/forecast/daily?&units=metric&lang=en&cnt=7",
-                {
-                    params: {
-                    id: cityID,
-                    APPID: "eaa34486712b91567e84a4e143423fe6"
-                    }
-                }
-                ).then(
-                function(response)
-                {
-                    console.log(response);
-                    $scope.weatherSevenDaysCity = response.data;
-                    $scope.searchedCities.push($scope.cityName.name); // lägger in stadens namn i arrayen
-                },
-                function(response)
-                {
-                    console.log($scope.weatherSevenDaysCity);
-                    console.log(response);			
-                }
-                );
-    }*/
-
-    /*function getTwoDaysWeatherSwedish(cityID)
-    {
-         if(getSwedish() == "swedish")
-		 {
-            $http.get("http://api.openweathermap.org/data/2.5/forecast/daily?&units=metric&lang=sv&cnt=14",
-                {
-                    params: {
-                    id: cityID,
-                    APPID: "eaa34486712b91567e84a4e143423fe6"
-                    }
-                }
-                ).then(
-                function(response)
-                {
-                    console.log(response);
-                    $scope.weatherTwoWeeksCity = response.data;
-                    console.log($scope.weatherTwoWeeksCity);
-                },
-                function(response)
-                {
-                    console.log($scope.weatherTwoWeeksCity);
-                    console.log(response);			
-                }
-                );
-        }
-        else 
-        getTwoWeeksWeather(cityID);
-    }*/
-
-    /*function getTwoWeeksWeather(cityID)
-    {   
-        
-        $http.get("http://api.openweathermap.org/data/2.5/forecast/daily?&units=metric&cnt=14",
-			  {
-				 params: {
-                   id: cityID,
-                   lang: $scope.browserLang,
-				   APPID: "eaa34486712b91567e84a4e143423fe6"
-				}
-			  }
-			).then(
-			 function(response)
-			{
-				console.log(response);
-                $scope.weatherTwoWeeksCity = response.data;
-                console.log($scope.weatherTwoWeeksCity);
-                $scope.getWeekNumber();
-			},
-			function(response)
-			{
-                console.log($scope.weatherTwoWeeksCity);
-				console.log(response);			
-			}
-			);
-    }*/
-
 // hämtar cityID från en stad som man sökt på
 $scope.getCityID = function(city)
 {
@@ -440,16 +375,35 @@ app.directive('weatherRowData', function()
     },
     link: function(scope, element, attr) {
     },
-    controller: function($scope, $element) {
+    controller: function($scope, $element, $filter) {
 
-     $scope.getWeather = function()
+     $scope.getWeather = function(myEv)
       {
-          //alert(scope.weatherData.weather[scope.index].description); 
-          //alert(scope.index);
+          //document.getElementById('selectedWeather').style.backgroundColor = "#D8B0FF";
+          $("#selectedWeather").css("background-color", "#D8B0FF");
+          //console.log( $( "#selectedWeather" ).get( $scope.index )); 
           console.log($scope.index);
+          //console.log($event);
+          $scope.x = myEv.clientX;
+          $scope.y = myEv.clientY;
+          console.log($scope.x + " " + $scope.y);
+        
           document.getElementById('draggable').style.display = "block";
+          $('#draggable').css('position', 'absolute');
+          document.getElementById('draggable').style.top = $scope.y+"px"; 
+          document.getElementById('draggable').style.left = $scope.x+"px"; 
+          //$('#draggable').css('top', $scope.x); //or wherever you want it
+          //$('#draggable').css('right', $scope.y); //or wherever you want it
+          //$("#draggable").offset({ top: $scope.x, left: $scope.y});
+          //$scope.mousecoord = $scope.x + " " + $scope.y;
+         // document.getElementById('draggable').innerHTML = $scope.x + $scope.y;
+         var currentClickedDate = $scope.weatherData.dt; // sparar den klickade datumet
 
-           // $(".modal-body #weatherID").val("Lufttryck: " + " " + $scope.weatherData.pressure + " " + "vindhastighet: " + " " + $scope.weatherData.speed + "m/s");
+         // skickar in i mitt egna filter de datum man klickat i sekunder)
+         var clickedDate = $filter('secondsToDate')(currentClickedDate);
+         document.getElementById('popupText').innerHTML = "<p>" + clickedDate + "<p>" + "<p>" + "Lufttryck: " + " " + $scope.weatherData.pressure
+         + "<p>" + " Vindhastighet: " + " " + $scope.weatherData.speed + "m/s";
+
          // alert("Lufttryck: " + " " + $scope.weatherData.pressure + " " + "vindhastighet: " + " " + $scope.weatherData.speed + "m/s");
           
       }
